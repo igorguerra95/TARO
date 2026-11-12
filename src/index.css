@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --background: 38 33% 97%;
+  --foreground: 274 38% 14%;
+  --card: 38 35% 99%;
+  --card-foreground: 274 38% 14%;
+  --surface: 35 24% 93%;
+  --surface-foreground: 274 32% 18%;
+  --primary: 273 68% 39%;
+  --primary-hover: 273 72% 32%;
+  --primary-foreground: 38 40% 98%;
+  --secondary: 46 65% 52%;
+  --secondary-soft: 46 58% 92%;
+  --secondary-foreground: 274 42% 14%;
+  --muted: 35 20% 91%;
+  --muted-foreground: 273 16% 37%;
+  --border: 34 18% 85%;
+  --ring: 273 68% 39%;
+  --deep-plum: 275 56% 16%;
+  --deep-plum-foreground: 38 33% 97%;
+  --success: 152 46% 32%;
+  --destructive: 0 65% 44%;
+
+  --shadow-soft: 0 12px 32px -12px hsl(274 38% 14% / 0.08), 0 2px 6px -1px hsl(274 38% 14% / 0.04);
+  --shadow-elevated: 0 22px 44px -14px hsl(273 68% 39% / 0.14), 0 6px 16px -4px hsl(274 38% 14% / 0.06);
+  --gradient-botanical: linear-gradient(135deg, hsl(273 68% 39% / 0.06) 0%, hsl(46 65% 52% / 0.08) 100%);
+  --gradient-plum-rich: linear-gradient(155deg, hsl(275 56% 16%) 0%, hsl(273 62% 24%) 100%);
+  --gradient-gold-accent: linear-gradient(90deg, hsl(46 65% 52%) 0%, hsl(40 72% 62%) 100%);
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-surface: hsl(var(--surface));
+  --color-surface-foreground: hsl(var(--surface-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-hover: hsl(var(--primary-hover));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-soft: hsl(var(--secondary-soft));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-deep-plum: hsl(var(--deep-plum));
+  --color-deep-plum-foreground: hsl(var(--deep-plum-foreground));
+  --color-success: hsl(var(--success));
+  --color-destructive: hsl(var(--destructive));
+
+  --font-display: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+.bg-botanical-tint {
+  background-image: var(--gradient-botanical);
+}
+
+.bg-plum-rich {
+  background-image: var(--gradient-plum-rich);
+}
+
+.bg-grain-subtle {
+  background-image: radial-gradient(hsl(274 38% 14% / 0.03) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

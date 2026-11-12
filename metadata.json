@@ -1,0 +1,6 @@
+{
+  "name": "Cartomante — Leituras de Tarô e Baralho Cigano",
+  "description": "Consultas de cartomancia, leitura de Tarô, Baralho Cigano e orientação oracular com sigilo e acolhimento.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

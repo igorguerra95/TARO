@@ -1,0 +1,60 @@
+name: Automação Central de Configuração do GitHub Pages
+
+on:
+  # Executa periodicamente a cada 10 minutos para identificar novos repositórios sincronizados
+  schedule:
+    - cron: '*/10 * * * *'
+
+  # Permite disparo manual com ou sem repositório específico
+  workflow_dispatch:
+    inputs:
+      target_repo:
+        description: 'Nome do repositório a configurar (ex: meu-novo-site) ou deixe vazio para varrer recentes'
+        required: false
+        default: ''
+      target_owner:
+        description: 'Proprietário (deixe vazio para usar o proprietário do token)'
+        required: false
+        default: ''
+
+  # Permite disparo via webhook / API externa caso desejado
+  repository_dispatch:
+    types:
+      - configure-new-repo
+      - sync-repo
+
+  # Executa quando houver alteração no script de automação
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/setup-new-repo.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "automation-pages-setup"
+  cancel-in-progress: false
+
+jobs:
+  configure:
+    name: Configurar Repositórios GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositório central
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Executar Automação com PAGES_AUTOMATION_TOKEN
+        env:
+          PAGES_AUTOMATION_TOKEN: ${{ secrets.PAGES_AUTOMATION_TOKEN }}
+          TARGET_REPO: ${{ inputs.target_repo || github.event.client_payload.repo || '' }}
+          TARGET_OWNER: ${{ inputs.target_owner || github.event.client_payload.owner || '' }}
+        run: node scripts/setup-github-repo.mjs
